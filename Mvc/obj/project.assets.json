@@ -268,11 +268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Mvc\\Mvc.csproj",
+      "projectUniqueName": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Mvc\\Mvc.csproj",
       "projectName": "Mvc",
-      "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Mvc\\Mvc.csproj",
+      "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Mvc\\Mvc.csproj",
       "packagesPath": "C:\\Users\\raiky.novaes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Mvc\\obj\\",
+      "outputPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Mvc\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\raiky.novaes\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -290,11 +290,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Dominio\\Dominio.csproj": {
-              "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Dominio\\Dominio.csproj"
+            "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Dominio\\Dominio.csproj": {
+              "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Dominio\\Dominio.csproj"
             },
-            "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Servico\\Servico.csproj": {
-              "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Servico\\Servico.csproj"
+            "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Servico\\Servico.csproj": {
+              "projectPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Servico\\Servico.csproj"
             }
           }
         }

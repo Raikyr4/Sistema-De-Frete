@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EItHsh43IY8=",
+  "dgSpecHash": "sRYmkUi9AiM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\freight-system\\Mvc\\Mvc.csproj",
+  "projectFilePath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Mvc\\Mvc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\raiky.novaes\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\raiky.novaes\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",

@@ -63,17 +63,17 @@ namespace Repositorio.Validacoes
                 return false;
             }
 
-            if (_repositorioCidade.ExisteCidade(dtoFrete.CodigoDaCidadeDeOrigem))
-            {
-                Console.WriteLine("Erro: A cidade de origem especificada não existe.");
-                return false;
-            }
+            //if (_repositorioCidade.ExisteCidade(dtoFrete.CodigoDaCidadeDeOrigem,))
+            //{
+            //    Console.WriteLine("Erro: A cidade de origem especificada não existe.");
+            //    return false;
+            //}
 
-            if (_repositorioCidade.ExisteCidade(dtoFrete.CodigoDaCidadeDeDestino))
-            {
-                Console.WriteLine("Erro: A cidade de destino especificada não existe.");
-                return false;
-            }
+            //if (_repositorioCidade.ExisteCidade(dtoFrete.CodigoDaCidadeDeDestino))
+            //{
+            //    Console.WriteLine("Erro: A cidade de destino especificada não existe.");
+            //    return false;
+            //}
 
             if (dtoFrete.CodigoDoCliente <= 0 || dtoFrete.CodigoDoDestinatario <= 0 || dtoFrete.CodigoDoFuncionario <= 0)
             {

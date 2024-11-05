@@ -1,0 +1,129 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D62EBEE6-6EF2-4F63-B19E-B02BE6DCF685}|Teste\\Teste.csproj|c:\\users\\raiky.novaes\\desktop\\atividade\\sistemadefrete\\teste\\testes\\testecrud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D62EBEE6-6EF2-4F63-B19E-B02BE6DCF685}|Teste\\Teste.csproj|solutionrelative:teste\\testes\\testecrud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D62EBEE6-6EF2-4F63-B19E-B02BE6DCF685}|Teste\\Teste.csproj|c:\\users\\raiky.novaes\\desktop\\atividade\\sistemadefrete\\teste\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{D62EBEE6-6EF2-4F63-B19E-B02BE6DCF685}|Teste\\Teste.csproj|solutionrelative:teste\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFC2807B-4A63-46BC-A4F3-40D788B3A01B}|Repositorio\\Repositorio.csproj|c:\\users\\raiky.novaes\\desktop\\atividade\\sistemadefrete\\repositorio\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{FFC2807B-4A63-46BC-A4F3-40D788B3A01B}|Repositorio\\Repositorio.csproj|solutionrelative:repositorio\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFC2807B-4A63-46BC-A4F3-40D788B3A01B}|Repositorio\\Repositorio.csproj|c:\\users\\raiky.novaes\\desktop\\atividade\\sistemadefrete\\repositorio\\configbanco\\configbanco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFC2807B-4A63-46BC-A4F3-40D788B3A01B}|Repositorio\\Repositorio.csproj|solutionrelative:repositorio\\configbanco\\configbanco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TesteCRUD.cs",
+              "DocumentMoniker": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Teste\\testes\\TesteCRUD.cs",
+              "RelativeDocumentMoniker": "Teste\\testes\\TesteCRUD.cs",
+              "ToolTip": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Teste\\testes\\TesteCRUD.cs",
+              "RelativeToolTip": "Teste\\testes\\TesteCRUD.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwKsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T10:35:16.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "packages.config",
+              "DocumentMoniker": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Teste\\packages.config",
+              "RelativeDocumentMoniker": "Teste\\packages.config",
+              "ToolTip": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Teste\\packages.config",
+              "RelativeToolTip": "Teste\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-11-05T10:34:10.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ConfigBanco.cs",
+              "DocumentMoniker": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Repositorio\\ConfigBanco\\ConfigBanco.cs",
+              "RelativeDocumentMoniker": "Repositorio\\ConfigBanco\\ConfigBanco.cs",
+              "ToolTip": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Repositorio\\ConfigBanco\\ConfigBanco.cs",
+              "RelativeToolTip": "Repositorio\\ConfigBanco\\ConfigBanco.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T10:27:13.89Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "28f8fc5e-4e7e-42e2-85b3-54374e1ba928",
+        "Display": 0,
+        "X": 804,
+        "Y": 126,
+        "Width": 1600,
+        "Height": 667,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "packages.config",
+              "DocumentMoniker": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Repositorio\\packages.config",
+              "RelativeDocumentMoniker": "Repositorio\\packages.config",
+              "ToolTip": "C:\\Users\\raiky.novaes\\Desktop\\ATIVIDADE\\SistemaDeFrete\\Repositorio\\packages.config",
+              "RelativeToolTip": "Repositorio\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-11-05T10:34:00.573Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

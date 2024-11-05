@@ -320,11 +320,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Npgsql.Internal.Converters.ArrayConverter`1.Continuation.#ctor(System.Object,)">
+        <member name="M:Npgsql.Internal.Converters.PgArrayConverter.Continuation.#ctor(System.Object,)">
             <param name="handle">A reference to the type that houses the static method <see ref="continuation"/> points to.</param>
             <param name="continuation">The continuation</param>
         </member>
-        <member name="M:Npgsql.Internal.Converters.AsyncHelpers.Continuation.#ctor(System.Object,)">
+        <member name="M:Npgsql.Internal.Converters.AsyncHelpers.CompletionSourceContinuation.#ctor(System.Object,)">
             <param name="handle">A reference to the type that houses the static method <see ref="continuation"/> points to.</param>
             <param name="continuation">The continuation</param>
         </member>
@@ -6507,6 +6507,27 @@
             </summary>
             <returns>The same builder instance so that multiple calls can be chained.</returns>
         </member>
+        <member name="M:Npgsql.NpgsqlSlimDataSourceBuilder.EnableNetworkTypes">
+            <summary>
+            Sets up network mappings. This allows mapping PhysicalAddress, IPAddress, NpgsqlInet and NpgsqlCidr types
+            to PostgreSQL <c>macaddr</c>, <c>macaddr8</c>, <c>inet</c> and <c>cidr</c> types.
+            </summary>
+            <returns>The same builder instance so that multiple calls can be chained.</returns>
+        </member>
+        <member name="M:Npgsql.NpgsqlSlimDataSourceBuilder.EnableGeometricTypes">
+            <summary>
+            Sets up network mappings. This allows mapping types like NpgsqlPoint and NpgsqlPath
+            to PostgreSQL <c>point</c>, <c>path</c> and so on types.
+            </summary>
+            <returns>The same builder instance so that multiple calls can be chained.</returns>
+        </member>
+        <member name="M:Npgsql.NpgsqlSlimDataSourceBuilder.EnableJsonTypes">
+            <summary>
+            Sets up System.Text.Json mappings. This allows mapping JsonDocument and JsonElement types to PostgreSQL <c>json</c> and <c>jsonb</c>
+            types.
+            </summary>
+            <returns>The same builder instance so that multiple calls can be chained.</returns>
+        </member>
         <member name="M:Npgsql.NpgsqlSlimDataSourceBuilder.EnableDynamicJson(System.Type[],System.Type[])">
             <summary>
             Sets up dynamic System.Text.Json mappings. This allows mapping arbitrary .NET types to PostgreSQL <c>json</c> and <c>jsonb</c>
@@ -6521,6 +6542,7 @@
             <remarks>
             Due to the dynamic nature of these mappings, they are not compatible with NativeAOT or trimming.
             </remarks>
+            <returns>The same builder instance so that multiple calls can be chained.</returns>
         </member>
         <member name="M:Npgsql.NpgsqlSlimDataSourceBuilder.EnableRecordsAsTuples">
             <summary>
@@ -8517,6 +8539,12 @@
             Gets the data type of the specified column.
             </summary>
             <returns>The data type of the specified column.</returns>
+        </member>
+        <member name="M:Npgsql.Replication.PgOutput.ReplicationValue.GetFieldName">
+            <summary>
+            Gets the name of the specified column.
+            </summary>
+            <returns>The name of the specified column.</returns>
         </member>
         <member name="M:Npgsql.Replication.PgOutput.ReplicationValue.Get``1(System.Threading.CancellationToken)">
             <summary>

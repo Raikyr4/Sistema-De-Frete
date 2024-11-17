@@ -56,7 +56,13 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Cliente WHERE cod_cliente = @Codigo";
+                string sql = @"
+                            SELECT 
+                                cod_cliente AS Codigo,
+                                endereco AS Endereco,
+                                telefone AS Telefone,
+                                data_inscricao AS DataDeInscricao
+                            FROM Cliente WHERE cod_cliente = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<Cliente>(sql, new { Codigo = id });
             }
@@ -66,11 +72,18 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Cliente";
+                string sql = @"
+                            SELECT 
+                                cod_cliente AS Codigo,
+                                endereco AS Endereco,
+                                telefone AS Telefone,
+                                data_inscricao AS DataDeInscricao
+                            FROM Cliente";
 
                 return dbConnection.Query<Cliente>(sql).AsList();
             }
         }
+
 
         public bool ExisteCliente(int codigo)
         {

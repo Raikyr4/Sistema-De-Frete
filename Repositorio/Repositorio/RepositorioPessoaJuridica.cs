@@ -12,11 +12,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = @"INSERT INTO PessoaJuridica (razao_social, inscricao_estadual, cnpj, eh_representante) 
-                               VALUES (@RazaoSocial, @InscricaoEstadual, @CNPJ, @EhRepresentante)";
+                string sql = @"INSERT INTO PessoaJuridica (cod_PessoaJuridica, razao_social, inscricao_estadual, cnpj, eh_representante) 
+                               VALUES (@Codigo, @RazaoSocial, @InscricaoEstadual, @CNPJ, @EhRepresentante)";
 
                 dbConnection.Execute(sql, new
                 {
+                    pessoaJuridica.Codigo,
                     pessoaJuridica.RazaoSocial,
                     pessoaJuridica.InscricaoEstadual,
                     pessoaJuridica.CNPJ,
@@ -32,7 +33,7 @@ namespace Repositorio.Repositorio
                 string sql = @"UPDATE PessoaJuridica 
                                SET razao_social = @RazaoSocial, inscricao_estadual = @InscricaoEstadual, 
                                cnpj = @CNPJ, eh_representante = @EhRepresentante 
-                               WHERE id_cliente = @Codigo";
+                               WHERE cod_PessoaJuridica = @Codigo";
 
                 dbConnection.Execute(sql, new
                 {
@@ -59,7 +60,14 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM PessoaJuridica WHERE cod_PessoaJuridica = @Codigo";
+                string sql = @"
+                            SELECT 
+                                cod_PessoaJuridica AS Codigo,
+                                razao_social AS RazaoSocial,
+                                inscricao_estadual AS InscricaoEstadual,
+                                cnpj AS CNPJ,
+                                eh_representante AS EhRepresentante
+                            FROM PessoaJuridica WHERE cod_PessoaJuridica = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<PessoaJuridica>(sql, new { Codigo = id });
             }
@@ -69,7 +77,14 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM PessoaJuridica";
+                string sql = @"
+                            SELECT 
+                                cod_PessoaJuridica AS Codigo,
+                                razao_social AS RazaoSocial,
+                                inscricao_estadual AS InscricaoEstadual,
+                                cnpj AS CNPJ,
+                                eh_representante AS EhRepresentante
+                            FROM PessoaJuridica";
 
                 return dbConnection.Query<PessoaJuridica>(sql).AsList();
             }

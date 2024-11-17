@@ -57,7 +57,14 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Estado WHERE id_estado = @Codigo";
+                string sql = @"
+                            SELECT 
+                                id_estado AS Codigo,
+                                nome_estado AS Nome,
+                                uf,
+                                icms_local AS ICMSLocal,
+                                icms_outro_uf AS ICMSExterno
+                            FROM Estado WHERE id_estado = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<Estado>(sql, new { Codigo = id });
             }
@@ -67,7 +74,14 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Estado";
+                string sql = @"
+                            SELECT 
+                                id_estado AS Codigo,
+                                nome_estado AS Nome,
+                                uf,
+                                icms_local AS ICMSLocal,
+                                icms_outro_uf AS ICMSExterno
+                            FROM Estado";
 
                 return dbConnection.Query<Estado>(sql).AsList();
             }

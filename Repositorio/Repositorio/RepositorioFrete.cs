@@ -80,7 +80,22 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Frete WHERE id_frete = @Codigo";
+                string sql = @"
+                            SELECT 
+                                id_frete AS Codigo,
+                                peso AS Peso,
+                                valor AS Valor,
+                                icms AS ICMS,
+                                pedagio AS Pedagio,
+                                data_frete AS DataInicio,
+                                id_origem AS CodigoDaCidadeDeOrigem,
+                                id_destino AS CodigoDaCidadeDeDestino,
+                                id_remetente AS CodigoDoCliente,
+                                id_destinatario AS CodigoDoDestinatario,
+                                id_funcionario AS CodigoDoFuncionario,
+                                quem_paga AS QuemPaga,
+                                num_conhecimento AS NumeroDeConhecimento
+                            FROM Frete WHERE id_frete = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<Frete>(sql, new { Codigo = id });
             }
@@ -90,11 +105,27 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Frete";
+                string sql = @"
+                            SELECT 
+                                id_frete AS Codigo,
+                                peso AS Peso,
+                                valor AS Valor,
+                                icms AS ICMS,
+                                pedagio AS Pedagio,
+                                data_frete AS DataInicio,
+                                id_origem AS CodigoDaCidadeDeOrigem,
+                                id_destino AS CodigoDaCidadeDeDestino,
+                                id_remetente AS CodigoDoCliente,
+                                id_destinatario AS CodigoDoDestinatario,
+                                id_funcionario AS CodigoDoFuncionario,
+                                quem_paga AS QuemPaga,
+                                num_conhecimento AS NumeroDeConhecimento
+                            FROM Frete";
 
                 return dbConnection.Query<Frete>(sql).AsList();
             }
         }
+
 
 
         public bool ExisteFrete(int codigo)

@@ -1,3 +1,4 @@
+using Dominio.Objeto;
 using NUnit.Framework;
 using Repositorio.Repositorio;
 using System;
@@ -70,7 +71,7 @@ namespace Testes
         [Test]
         public void TesteDeletarEstado()
         {
-            int codigo = 1; // pode ser qualquer Codigo de estado que já estaja cadastrado no banco
+            int codigo = 1;
 
             _repositorioEstado.DeletarEstado(codigo);
 
@@ -84,8 +85,10 @@ namespace Testes
         [Test]
         public void TesteAdionarCidade()
         {
+            var estado = _fabricaDeObjetos.FabricaEstado();
             var cidade = _fabricaDeObjetos.FabricaCidade();
 
+            _repositorioEstado.AdicionarEstado(estado);
             _repositorioCidade.AdicionarCidade(cidade);
         }
 
@@ -113,9 +116,12 @@ namespace Testes
         [Test]
         public void TesteDeletarCidade()
         {
-            int codigo = 1; // pode ser qualquer Codigo de cidade que já estaja cadastrado no banco
+            int codigo = 1; 
+
+            var estado = _fabricaDeObjetos.FabricaEstado();
 
             _repositorioCidade.DeletarCidade(codigo);
+            _repositorioEstado.DeletarEstado(estado.Codigo);
 
             TesteObterTodasAsCidade();
         }
@@ -200,7 +206,7 @@ namespace Testes
         [Test]
         public void TesteDeletarCliente()
         {
-            int codigo = 3; // pode ser qualquer Codigo de Client que já estaja cadastrado no banco
+            int codigo = 1; 
 
             _repositorioCliente.DeletarCliente(codigo);
 
@@ -214,8 +220,11 @@ namespace Testes
         [Test]
         public void TesteAdicionarPessoaFisica()
         {
+            var cliente = _fabricaDeObjetos.FabricaCliente();
             var pessoaFisica = _fabricaDeObjetos.FabricaPessoaFisica();
 
+
+            _repositorioCliente.AdicionarCliente(cliente);
             _repositorioPessoaFisica.AdicionarPessoaFisica(pessoaFisica);
         }
 
@@ -245,7 +254,10 @@ namespace Testes
         {
             int codigo = 1;
 
+            var cliente = _fabricaDeObjetos.FabricaCliente();
+
             _repositorioPessoaFisica.DeletarPessoaFisica(codigo);
+            _repositorioCliente.DeletarCliente(cliente.Codigo);
 
             TesteObterTodosOsFuncionarios();
         }
@@ -257,9 +269,11 @@ namespace Testes
         [Test]
         public void TesteAdicionarPessoaJuridica()
         {
+            var cliente = _fabricaDeObjetos.FabricaCliente();
             var pessoaJuridica = _fabricaDeObjetos.FabricaPessoaJuridica();
 
             _repositorioPessoaJuridica.AdicionarPessoaJuridica(pessoaJuridica);
+            _repositorioCliente.AdicionarCliente(cliente);
         }
 
         [Test]
@@ -287,8 +301,10 @@ namespace Testes
         public void TesteDeletarPessoaJuridica()
         {
             int codigo = 1;
+            var cliente = _fabricaDeObjetos.FabricaCliente();
 
             _repositorioPessoaJuridica.DeletarPessoaJuridica(codigo);
+            _repositorioCliente.DeletarCliente(cliente.Codigo);
 
             TesteObterTodosOsFuncionarios();
         }
@@ -301,8 +317,20 @@ namespace Testes
         [Test]
         public void TesteAdicionarFrete()
         {
+            var estado = _fabricaDeObjetos.FabricaEstado();
+            var cidade1 = _fabricaDeObjetos.FabricaCidade();
+            var cidade2 = _fabricaDeObjetos.FabricaCidade();cidade2.Codigo = 2;
+            var cliente1 = _fabricaDeObjetos.FabricaCliente();
+            var cliente2 = _fabricaDeObjetos.FabricaCliente(); cliente2.Codigo = 2;
+            var funcionario = _fabricaDeObjetos.FabricaFuncionario();
             var frete = _fabricaDeObjetos.FabricaFrete();
 
+            _repositorioEstado.AdicionarEstado(estado);
+            _repositorioCidade.AdicionarCidade(cidade1);
+            _repositorioCidade.AdicionarCidade(cidade2);
+            _repositorioCliente.AdicionarCliente(cliente1);
+            _repositorioCliente.AdicionarCliente(cliente2);
+            _repositorioFuncionario.AdicionarFuncionario(funcionario);
             _repositorioFrete.AdicionarFrete(frete);
         }
 
@@ -327,16 +355,28 @@ namespace Testes
             _repositorioFrete.AtualizarFrete(frete);
         }
 
-        [Test]
+        [Test]     
         public void TesteDeletarFrete()
         {
+            var estado = _fabricaDeObjetos.FabricaEstado();
+            var cidade1 = _fabricaDeObjetos.FabricaCidade();
+            var cidade2 = _fabricaDeObjetos.FabricaCidade(); cidade2.Codigo = 2;
+            var cliente1 = _fabricaDeObjetos.FabricaCliente();
+            var cliente2 = _fabricaDeObjetos.FabricaCliente(); cliente2.Codigo = 2;
+            var funcionario = _fabricaDeObjetos.FabricaFuncionario();
+
             int codigo = 1;
 
             _repositorioFrete.DeletarFrete(codigo);
+            _repositorioCidade.DeletarCidade(cidade1.Codigo);
+            _repositorioCidade.DeletarCidade(cidade2.Codigo);
+            _repositorioEstado.DeletarEstado(estado.Codigo);
+            _repositorioCliente.DeletarCliente(cliente1.Codigo);
+            _repositorioCliente.DeletarCliente(cliente2.Codigo);
+            _repositorioFuncionario.DeletarFuncionario(funcionario.Codigo);
 
             TesteObterTodosOsFuncionarios();
         }
-
 
         #endregion
     }

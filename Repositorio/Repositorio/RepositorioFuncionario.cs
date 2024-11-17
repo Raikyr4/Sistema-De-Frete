@@ -54,7 +54,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Funcionario WHERE id_funcionario = @Codigo";
+                string sql = @"
+                             SELECT
+                                id_funcionario AS Codigo,
+                                nome_funcionario AS Nome,
+                                num_registro AS NumeroDeRegistro
+                             FROM Funcionario WHERE id_funcionario = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<Funcionario>(sql, new { Codigo = id });
             }
@@ -64,7 +69,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Funcionario";
+                string sql = @"
+                            SELECT 
+                                id_funcionario AS Codigo,
+                                nome_funcionario AS Nome,
+                                num_registro AS NumeroDeRegistro
+                            FROM Funcionario";
 
                 return dbConnection.Query<Funcionario>(sql).AsList();
             }

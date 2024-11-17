@@ -56,7 +56,13 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Cidade WHERE id_cidade = @Codigo";
+                string sql = @"
+                            SELECT 
+                                id_cidade AS Codigo,
+                                nome_cidade AS Nome,
+                                id_estado AS CodigoDoEstado,
+                                valor AS PrecoPadrao
+                            FROM Cidade WHERE id_cidade = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<Cidade>(sql, new { Codigo = id });
             }
@@ -66,7 +72,13 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM Cidade";
+                string sql = @"
+                            SELECT 
+                                id_cidade AS Codigo,
+                                nome_cidade AS Nome,
+                                id_estado AS CodigoDoEstado,
+                                valor AS PrecoPadrao
+                            FROM Cidade";
 
                 return dbConnection.Query<Cidade>(sql).AsList();
             }

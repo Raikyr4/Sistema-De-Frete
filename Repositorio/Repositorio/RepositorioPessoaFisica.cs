@@ -12,11 +12,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = @"INSERT INTO PessoaFisica (nome, cpf, cod_representante) 
-                               VALUES (@Nome, @CPF, @CodigoDoRepresentante)";
+                string sql = @"INSERT INTO PessoaFisica (cod_PessoaFisica, nome_cliente, cpf, representante) 
+                               VALUES (@Codigo, @Nome, @CPF, @CodigoDoRepresentante)";
 
                 dbConnection.Execute(sql, new
                 {
+                    pessoaFisica.Codigo,
                     pessoaFisica.Nome,
                     pessoaFisica.CPF,
                     pessoaFisica.CodigoDoRepresentante
@@ -29,7 +30,7 @@ namespace Repositorio.Repositorio
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
                 string sql = @"UPDATE PessoaFisica 
-                               SET nome = @Nome, cpf = @CPF, cod_representante = @CodigoDoRepresentante 
+                               SET nome_cliente = @Nome, cpf = @CPF, representante = @CodigoDoRepresentante 
                                WHERE cod_PessoaFisica = @Codigo";
 
                 dbConnection.Execute(sql, new
@@ -56,7 +57,13 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM PessoaFisica WHERE cod_PessoaFisica = @Codigo";
+                string sql = @"
+                            SELECT 
+                                cod_PessoaFisica AS Codigo,
+                                nome_cliente AS Nome,
+                                cpf AS CPF,
+                                representante AS CodigoDoRepresentante
+                            FROM PessoaFisica WHERE cod_PessoaFisica = @Codigo";
 
                 return dbConnection.QuerySingleOrDefault<PessoaFisica>(sql, new { Codigo = id });
             }
@@ -66,11 +73,18 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = "SELECT * FROM PessoaFisica";
+                string sql = @"
+                            SELECT 
+                                cod_PessoaFisica AS Codigo,
+                                nome_cliente AS Nome,
+                                cpf AS CPF,
+                                representante AS CodigoDoRepresentante
+                            FROM PessoaFisica";
 
                 return dbConnection.Query<PessoaFisica>(sql).AsList();
             }
         }
+
         public bool ExistePessoaFisica(string cpf)
         {
             if (cpf.Length < 14  || cpf.Length > 14) return false;

@@ -1,4 +1,3 @@
-using Dominio.Objeto;
 using NUnit.Framework;
 using Repositorio.Repositorio;
 using System;
@@ -272,8 +271,8 @@ namespace Testes
             var cliente = _fabricaDeObjetos.FabricaCliente();
             var pessoaJuridica = _fabricaDeObjetos.FabricaPessoaJuridica();
 
-            _repositorioPessoaJuridica.AdicionarPessoaJuridica(pessoaJuridica);
             _repositorioCliente.AdicionarCliente(cliente);
+            _repositorioPessoaJuridica.AdicionarPessoaJuridica(pessoaJuridica);
         }
 
         [Test]
@@ -308,7 +307,6 @@ namespace Testes
 
             TesteObterTodosOsFuncionarios();
         }
-
 
         #endregion
 

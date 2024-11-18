@@ -12,11 +12,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = @"INSERT INTO Funcionario (nome_funcionario, num_registro) 
-                               VALUES (@Nome, @NumeroDeRegistro)";
+                string sql = @"INSERT INTO Funcionario (id_funcionario, nome_funcionario, num_registro) 
+                               VALUES (@Codigo, @Nome, @NumeroDeRegistro)";
 
                 dbConnection.Execute(sql, new
                 {
+                    funcionario.Codigo,
                     funcionario.Nome,
                     funcionario.NumeroDeRegistro
                 });

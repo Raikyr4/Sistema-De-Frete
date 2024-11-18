@@ -11,11 +11,12 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = @"INSERT INTO Estado (nome_estado, uf, icms_local, icms_outro_uf) 
-                               VALUES (@Nome, @Uf, @ICMSLocal, @ICMSExterno)";
+                string sql = @"INSERT INTO Estado (id_estado,nome_estado, uf, icms_local, icms_outro_uf) 
+                               VALUES (@Codigo, @Nome, @Uf, @ICMSLocal, @ICMSExterno)";
 
                 dbConnection.Execute(sql, new
                 {
+                    estado.Codigo,
                     estado.Nome,
                     estado.Uf,
                     estado.ICMSLocal,

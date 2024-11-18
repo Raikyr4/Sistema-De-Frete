@@ -1,6 +1,6 @@
 ﻿-- Criação da tabela Estado (PAI)
 CREATE TABLE Estado (
-    id_estado SERIAL PRIMARY KEY,
+    id_estado INT PRIMARY KEY,
     nome_estado VARCHAR(100),
     uf VARCHAR(2),
     icms_local DECIMAL(10, 2),
@@ -9,7 +9,7 @@ CREATE TABLE Estado (
 
 -- Criação da tabela Cliente (PAI)
 CREATE TABLE Cliente (
-    cod_cliente SERIAL PRIMARY KEY,
+    cod_cliente INT PRIMARY KEY,
     endereco VARCHAR(255),
     telefone VARCHAR(20),
     data_inscricao DATE
@@ -17,7 +17,7 @@ CREATE TABLE Cliente (
 
 -- Criação da tabela Cidade (PAI) que depende da tabela Estado
 CREATE TABLE Cidade (
-    id_cidade SERIAL PRIMARY KEY,
+    id_cidade INT PRIMARY KEY,
     nome_cidade VARCHAR(100),
     id_estado INT,
     valor DECIMAL(10, 2),
@@ -26,7 +26,7 @@ CREATE TABLE Cidade (
 
 -- Criação da tabela de Funcionário (PAI)
 CREATE TABLE Funcionario (
-    id_funcionario SERIAL PRIMARY KEY,
+    id_funcionario INT PRIMARY KEY,
     nome_funcionario VARCHAR(100),
     num_registro INT
 );
@@ -53,7 +53,7 @@ CREATE TABLE PessoaFisica (
 
 -- Criação da tabela Frete (FILHO) que depende de Cidade, Cliente e Funcionário
 CREATE TABLE Frete (
-    id_frete SERIAL PRIMARY KEY,
+    id_frete INT PRIMARY KEY,
     peso DECIMAL(10, 2),
     valor DECIMAL(10, 2),
     icms DECIMAL(10, 2),

@@ -11,14 +11,15 @@ namespace Repositorio.Repositorio
         {
             using (IDbConnection dbConnection = ConfigBanco.GetConnection())
             {
-                string sql = @"INSERT INTO Frete (peso, valor, icms, pedagio, data_frete, id_origem, id_destino, 
+                string sql = @"INSERT INTO Frete (id_frete, peso, valor, icms, pedagio, data_frete, id_origem, id_destino, 
                                id_remetente, id_destinatario, id_funcionario, quem_paga, num_conhecimento) 
-                               VALUES (@Peso, @Valor, @ICMS, @Pedagio, @DataInicio, @CodigoDaCidadeDeOrigem, 
+                               VALUES (@Codigo, @Peso, @Valor, @ICMS, @Pedagio, @DataInicio, @CodigoDaCidadeDeOrigem, 
                                @CodigoDaCidadeDeDestino, @CodigoDoCliente, @CodigoDoDestinatario, 
                                @CodigoDoFuncionario, @QuemPaga, @NumeroDeConhecimento)";
 
                 dbConnection.Execute(sql, new
                 {
+                    frete.Codigo,
                     frete.Peso,
                     frete.Valor,
                     frete.ICMS,

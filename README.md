@@ -1,6 +1,6 @@
 # Estrutura do Projeto
 
-Este projeto utiliza uma arquitetura multicamadas em C# para uma aplicação MVC, facilitando a organização do código e promovendo separação de responsabilidades.
+Este projeto utiliza uma arquitetura multicamadas em C# para uma API, facilitando a organização do código e promovendo separação de responsabilidades.
 
 ## Estrutura das Camadas
 
@@ -25,12 +25,19 @@ Inclui a configuração da conexão com o banco de dados, centralizando os parâ
 ### 4. Serviço
 A camada de serviço contém classes que chamam as operações do repositório para executar ações de CRUD. Estas classes serão chamadas pelas controllers para executar as regras de negócio e manipulação de dados.
 
-### 5. Mvc
-Contém a interface da aplicação, organizada em:
+### 5. API
 
-   - **Controller**: Responsável por receber as requisições do usuário, invocar os serviços apropriados e retornar as respostas necessárias.
-   
-   - **View**: Armazena as interfaces visuais (não implementadas ainda) que serão apresentadas ao usuário final.
+A camada de **API** expõe os serviços da aplicação através de endpoints RESTful, permitindo que clientes externos interajam com o sistema de forma padronizada.
+
+- **Controllers**: Recebem as requisições HTTP e utilizam os serviços para executar operações nas entidades.
+- **Endpoints**: Seguem as convenções REST, utilizando os verbos HTTP (GET, POST, PUT, DELETE) para operações CRUD.
+- **Formato de Dados**: Utiliza JSON para transferência de dados entre cliente e servidor.
+- **Integração com Front-End**: Facilita a comunicação com aplicações front-end, como as desenvolvidas em React.
+- **Configuração**: Inclui o Swagger para documentação automática e está configurada para permitir requisições de origens específicas via CORS.
+
+---
+
+Essa camada enriquece a arquitetura do projeto, permitindo escalabilidade e integração com diversas aplicações.
 
 ### 6. Teste
 Contém testes que realizam o crud de cada entidade da nossa aplicação definida na cmada de Dominio.

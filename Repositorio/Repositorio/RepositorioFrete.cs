@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Dominio.Objeto;
 using System.Collections.Generic;
 using System.Data;
@@ -142,6 +142,77 @@ namespace Repositorio.Repositorio
                 var existe = count == 1;
 
                 return existe;
+            }
+        }
+
+
+        public IList<dynamic> ObterMediaDeFretePorEstado(int codigoDoEstado)
+        {
+            using (IDbConnection dbConnection = ConfigBanco.GetConnection())
+            {
+                string sql = @"
+                                WITH origem AS (
+                                    SELECT id_origem AS id_cidade, COUNT(*) AS quantidade_origem
+                                    FROM Frete
+                                    GROUP BY id_origem),
+                                    destino AS (
+                                    SELECT id_destino AS id_cidade, COUNT(*) AS quantidade_destino
+                                    FROM Frete
+                                    GROUP BY id_destino )
+                                SELECT 
+                                    e.nome_estado AS Estado,
+                                    c.nome_cidade AS Cidade,
+                                    COALESCE(AVG(origem.quantidade_origem), 0) AS MediaFreteOrigem,
+                                    COALESCE(AVG(destino.quantidade_destino), 0) AS MediaFreteDestino
+                                FROM Estado e
+                                JOIN Cidade c ON e.id_estado = c.id_estado
+                                LEFT JOIN  origem ON c.id_cidade = origem.id_cidade
+                                LEFT JOIN destino ON c.id_cidade = destino.id_cidade
+                                WHERE e.id_estado = @Codigo -- Parâmetro para informar o estado
+                                GROUP BY e.nome_estado, c.nome_cidade;
+                                ";
+                return dbConnection.Query(sql, new { Codigo = codigoDoEstado }).AsList();
+            }
+        }
+
+        public IList<dynamic> ObterFuncionariosDePessoasJuridicasERepresentantes(int mes, int ano )
+        {
+            using (IDbConnection dbConnection = ConfigBanco.GetConnection())
+            {
+                string sql = @"SELECT 
+                                    F.nome_funcionario AS funcionario,
+                                    PJ.razao_social AS empresa,
+                                    PJ.inscricao_estadual AS representante,
+                                    FR.data_frete
+                               FROM Frete FR
+                               JOIN Funcionario F ON FR.id_funcionario = F.id_funcionario
+                               JOIN Cliente C ON FR.id_remetente = C.cod_cliente
+                               JOIN PessoaJuridica PJ ON C.cod_cliente = PJ.cod_PessoaJuridica
+                               WHERE EXTRACT(MONTH FROM FR.data_frete) = @Mes AND EXTRACT (YEAR FROM FR.data_frete ) = @Ano;
+                               ";
+                return dbConnection.Query(sql, new { Mes = mes, Ano = ano }).AsList();
+            }
+        }
+        
+
+        public IList<dynamic> ArrecadacaoComFretesPorEstado(string nomeDoEstado)
+        {
+            using (IDbConnection dbConnection = ConfigBanco.GetConnection())
+            {
+                string sql = @"
+                            SELECT 
+                                c.nome_cidade AS cidade,
+                                e.nome_estado AS estado,
+                                COUNT(f.id_frete) AS quantidade_de_frete,
+                                SUM(f.valor) AS valor_total_arrecadado
+                            FROM Frete f
+                            JOIN  Cidade c ON f.id_destino = c.id_cidade
+                            JOIN Estado e on c.id_estado = e.id_estado
+                            WHERE  e.nome_estado = @NomeDoEstado AND DATE_PART('year', f.data_frete) = 2024
+                            GROUP BY c.nome_cidade, e.nome_estado
+                            ORDER BY valor_total_arrecadado DESC;";
+
+                return dbConnection.Query(sql, new { NomeDoEstado = nomeDoEstado }).AsList();
             }
         }
     }

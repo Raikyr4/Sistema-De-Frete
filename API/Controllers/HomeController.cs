@@ -34,6 +34,48 @@ namespace WebApp.Controllers
             _servicoFrete = servicoFrete;
         }
 
+        #region CONSULTAS
+
+        [HttpGet("ObterMediaDeFretePorEstado/{id}")]
+        public ActionResult<IList<dynamic>> ObterMediaDeFretePorEstado(int id)
+        {
+            var media = _servicoFrete.ObterMediaDeFretePorEstado(id);
+            if (media == null)
+                return NotFound();
+            return Ok(media);
+        }
+
+        [HttpGet("ArrecadacaoComFretesPorEstado/{estado}")]
+        public ActionResult<IList<dynamic>> ArrecadacaoComFretesPorEstado(string estado)
+        {
+            if (string.IsNullOrWhiteSpace(estado))
+            {
+                return BadRequest("O estado informado n√£o pode ser vazio.");
+            }
+
+            var resultado = _servicoFrete.ArrecadacaoComFretesPorEstado(estado);
+
+            if (resultado == null || !resultado.Any())
+            {
+                return NotFound($"N√£o foram encontrados fretes para o estado: {estado}");
+            }
+
+            return Ok(resultado);
+        }
+
+        [HttpGet("ObterFuncionariosDePessoasJuridicasERepresentantes")]
+        public ActionResult<IList<dynamic>> ObterFuncionariosDePessoasJuridicasERepresentantes(int mes, int ano)
+        {
+            var funcionarios = _servicoFrete.ObterFuncionariosDePessoasJuridicasERepresentantes(mes,ano);
+
+            if (funcionarios == null)
+                return NotFound();
+
+            return Ok(funcionarios);
+        }
+
+        #endregion  
+
         #region CRUD FRETE
 
         [HttpPost("AdicionarFrete")]
@@ -210,7 +252,7 @@ namespace WebApp.Controllers
 
         #endregion
 
-        #region CRUD PESSOA FÕSICA
+        #region CRUD PESSOA F√çSICA
 
         [HttpPost("AdicionarPessoaFisica")]
         public IActionResult AdicionarPessoaFisica([FromBody] DTOPessoaFisica dtoPessoaFisica)
@@ -254,7 +296,7 @@ namespace WebApp.Controllers
 
         #endregion
 
-        #region CRUD PESSOA JURÕDICA
+        #region CRUD PESSOA JUR√çDICA
 
         [HttpPost("AdicionarPessoaJuridica")]
         public IActionResult AdicionarPessoaJuridica([FromBody] DTOPessoaJuridica dtoPessoaJuridica)
@@ -298,7 +340,7 @@ namespace WebApp.Controllers
 
         #endregion
 
-        #region CRUD FUNCION¡RIO
+        #region CRUD FUNCION√ÅRIO
 
         [HttpPost("AdicionarFuncionario")]
         public IActionResult AdicionarFuncionario([FromBody] DTOFuncionario dtoFuncionario)

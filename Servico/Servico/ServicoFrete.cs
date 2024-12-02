@@ -1,9 +1,10 @@
-﻿using Dominio.Objeto;
+using Dominio.Objeto;
 using DTO.DTOs;
 using Repositorio.Conversor;
 using Repositorio.Repositorio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Servico
 {
@@ -80,6 +81,47 @@ namespace Servico
             }
 
             return listaDTOFrete;
+        }
+
+        public IList<dynamic> ObterMediaDeFretePorEstado(int id)
+        {
+            if (id <= 0)
+                throw new ArgumentException("O código do estado deve ser válido.");
+
+            var media = _repositorioFrete.ObterMediaDeFretePorEstado(id);
+
+            if (media == null)
+                throw new KeyNotFoundException("Frete não encontrado.");
+
+            return media;
+        }
+
+        public IList<dynamic> ObterFuncionariosDePessoasJuridicasERepresentantes(int mes,int ano)
+        {
+            if (mes <= 0 && mes > 12)
+                throw new ArgumentException("O mês deve estar entre 1 e 12");
+
+            if (ano <= 0 && ano > 2024)
+                throw new ArgumentException("O ano deve estar entre 0 e 2024");
+
+            var media = _repositorioFrete.ObterFuncionariosDePessoasJuridicasERepresentantes(mes,ano);
+
+            if (media == null)
+                throw new KeyNotFoundException("Frete não encontrado.");
+
+            return media;
+        }
+
+        public IList<dynamic> ArrecadacaoComFretesPorEstado(string estado)
+        {
+            if (string.IsNullOrWhiteSpace(estado))
+            {
+                throw new ArgumentException("O estado informado não pode ser vazio.", nameof(estado));
+            }
+
+            var listaDeArrecadacoes = _repositorioFrete.ArrecadacaoComFretesPorEstado(estado);
+
+            return listaDeArrecadacoes;
         }
     }
 }

@@ -1,0 +1,387 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+'---------------- CAMADA DE APRESENTAÇÃO ----------------'
+package "Apresentação (Controller)" {
+  class HomeController {
+    + ObterMediaDeFretePorEstado(int id) : ActionResult<IList<dynamic>>
+    + ArrecadacaoComFretesPorEstado(string estado) : ActionResult<IList<dynamic>>
+    + ObterFuncionariosDePessoasJuridicasERepresentantes(int mes, int ano) : ActionResult<IList<dynamic>>
+    + AdicionarFrete([FromBody] DTOFrete dtoFrete) : IActionResult
+    + ObterFretes() : ActionResult<IEnumerable<DTOFrete>>
+    + ObterFrete(int id) : ActionResult<DTOFrete>
+    + AtualizarFrete(int id, [FromBody] DTOFrete dtoFrete) : IActionResult
+    + DeletarFrete(int id) : IActionResult
+    + AdicionarEstado([FromBody] DTOEstado dtoEstado) : IActionResult
+    + ObterEstados() : ActionResult<IEnumerable<DTOEstado>>
+    + ObterEstado(int id) : ActionResult<DTOEstado>
+    + AtualizarEstado(int id, [FromBody] DTOEstado dtoEstado) : IActionResult
+    + DeletarEstado(int id) : IActionResult
+    + AdicionarCidade([FromBody] DTOCidade dtoCidade) : IActionResult
+    + ObterCidades() : ActionResult<IEnumerable<DTOCidade>>
+    + ObterCidade(int id) : ActionResult<DTOCidade>
+    + AtualizarCidade(int id, [FromBody] DTOCidade dtoCidade) : IActionResult
+    + DeletarCidade(int id) : IActionResult
+    + AdicionarCliente([FromBody] DTOCliente dtoCliente) : IActionResult
+    + ObterClientes() : ActionResult<IEnumerable<DTOCliente>>
+    + ObterCliente(int id) : ActionResult<DTOCliente>
+    + AtualizarCliente(int id, [FromBody] DTOCliente dtoCliente) : IActionResult
+    + DeletarCliente(int id) : IActionResult
+    + AdicionarPessoaFisica([FromBody] DTOPessoaFisica dtoPessoaFisica) : IActionResult
+    + ObterPessoasFisicas() : ActionResult<IEnumerable<DTOPessoaFisica>>
+    + ObterPessoaFisica(int id) : ActionResult<DTOPessoaFisica>
+    + AtualizarPessoaFisica(int id, [FromBody] DTOPessoaFisica dtoPessoaFisica) : IActionResult
+    + DeletarPessoaFisica(int id) : IActionResult
+    + AdicionarPessoaJuridica([FromBody] DTOPessoaJuridica dtoPessoaJuridica) : IActionResult
+    + ObterPessoasJuridicas() : ActionResult<IEnumerable<DTOPessoaJuridica>>
+    + ObterPessoaJuridica(int id) : ActionResult<DTOPessoaJuridica>
+    + AtualizarPessoaJuridica(int id, [FromBody] DTOPessoaJuridica dtoPessoaJuridica) : IActionResult
+    + DeletarPessoaJuridica(int id) : IActionResult
+    + AdicionarFuncionario([FromBody] DTOFuncionario dtoFuncionario) : IActionResult
+    + ObterFuncionarios() : ActionResult<IEnumerable<DTOFuncionario>>
+    + ObterFuncionario(int id) : ActionResult<DTOFuncionario>
+    + AtualizarFuncionario(int id, [FromBody] DTOFuncionario dtoFuncionario) : IActionResult
+    + DeletarFuncionario(int id) : IActionResult
+  }
+  Program <|-- HomeController
+  class Program
+  {
+    + builder : WebApplicationBuilder
+    + app : WebApplication
+  }
+}
+
+'---------------- CAMADA DE DOMÍNIO ----------------'
+package "Domínio" {
+  class Cidade {
+    + Codigo : int
+    + Nome : string
+    + CodigoDoEstado : int
+    + PrecoPadrao : float
+  }
+
+  class Cliente {
+    + Codigo : int
+    + Endereco : string
+    + Telefone : string
+    + DataDeInscricao : DateTime
+  }
+
+  class Estado {
+    + Codigo : int
+    + Nome : string
+    + Uf : string
+    + ICMSLocal : float
+    + ICMSExterno : float
+  }
+
+  class Frete {
+    + Codigo : int
+    + Peso : float
+    + Valor : float
+    + ICMS : float
+    + Pedagio : float
+    + DataInicio : DateTime
+    + CodigoDaCidadeDeOrigem : int
+    + CodigoDaCidadeDeDestino : int
+    + CodigoDoCliente : int
+    + CodigoDoDestinatario : int
+    + CodigoDoFuncionario : int
+    + QuemPaga : string
+    + NumeroDeConhecimento : string
+  }
+
+  class Funcionario {
+    + Codigo : int
+    + Nome : string
+    + NumeroDeRegistro : int
+  }
+
+  class PessoaFisica {
+    + Nome : string
+    + CPF : string
+  }
+
+  class PessoaJuridica {
+    + RazaoSocial : string
+    + InscricaoEstadual : string
+    + CNPJ : string
+    + EhRepresentante : bool
+  }
+
+  Cliente <|-- PessoaFisica
+  Cliente <|-- PessoaJuridica
+}
+
+'---------------- CAMADA DE DTOs ----------------'
+package "DTOs" {
+
+class DTOCliente {
+  + Codigo : int
+  + Endereco : string
+  + Telefone : string
+  + DataDeInscricao : DateTime
+}
+class DTOEstado {
+  + Codigo : int
+  + Nome : string
+  + Uf : string
+  + ICMSLocal : float
+  + ICMSExterno : float
+}
+class DTOFrete {
+  + Codigo : int
+  + Peso : float
+  + Valor : float
+  + ICMS : float
+  + Pedagio : float
+  + DataInicio : DateTime
+  + CodigoDaCidadeDeOrigem : int
+  + CodigoDaCidadeDeDestino : int
+  + CodigoDoCliente : int
+  + CodigoDoDestinatario : int
+  + CodigoDoFuncionario : int
+  + QuemPaga : string
+  + NumeroDeConhecimento : string
+}
+class DTOFuncionario {
+  + Codigo : int
+  + Nome : string
+  + NumeroDeRegistro : int
+}
+class DTOPessoaFisica {
+  + Nome : string
+  + CPF : string
+  + CodigoDoRepresentante : int
+}
+DTOCliente <|-- DTOPessoaFisica
+class DTOPessoaJuridica {
+  + RazaoSocial : string
+  + InscricaoEstadual : string
+  + CNPJ : string
+  + EhRepresentante : bool
+}
+DTOCliente <|-- DTOPessoaJuridica
+}
+
+'---------------- CAMADA DE APLICAÇÃO ----------------'
+package "Aplicação (Serviços)" {
+class ServicoCidade {
+  + AdicionarCidade(DTOCidade dtoCidade) : void
+  + AtualizarCidade(DTOCidade dtoCidade) : void
+  + DeletarCidade(int id) : void
+  + ObterCidadePorId(int id) : DTOCidade
+  + ObterTodasCidades() : IList<DTOCidade>
+}
+class ServicoCliente {
+  + AdicionarCliente(DTOCliente dtoCliente) : void
+  + AtualizarCliente(DTOCliente dtoCliente) : void
+  + DeletarCliente(int id) : void
+  + ObterClientePorId(int id) : DTOCliente
+  + ObterTodosClientes() : IList<DTOCliente>
+}
+class ServicoEstado {
+  + AdicionarEstado(DTOEstado dtoEstado) : void
+  + AtualizarEstado(DTOEstado dtoEstado) : void
+  + DeletarEstado(int id) : void
+  + ObterEstadoPorId(int id) : DTOEstado
+  + ObterTodosEstados() : IList<DTOEstado>
+}
+class ServicoFrete {
+  + AdicionarFrete(DTOFrete dtoFrete) : void
+  + AtualizarFrete(DTOFrete dtoFrete) : void
+  + DeletarFrete(int id) : void
+  + ObterFretePorId(int id) : DTOFrete
+  + ObterTodosFretes() : IList<DTOFrete>
+  + ObterMediaDeFretePorEstado(int id) : IList<dynamic>
+  + ObterFuncionariosDePessoasJuridicasERepresentantes(int mes,int ano) : IList<dynamic>
+  + ArrecadacaoComFretesPorEstado(string estado) : IList<dynamic>
+}
+class ServicoFuncionario {
+  + AdicionarFuncionario(DTOFuncionario dtoFuncionario) : void
+  + AtualizarFuncionario(DTOFuncionario dtoFuncionario) : void
+  + DeletarFuncionario(int id) : void
+  + ObterFuncionarioPorId(int id) : DTOFuncionario
+  + ObterTodosFuncionarios() : IList<DTOFuncionario>
+}
+class ServicoPessoaFisica {
+  + AdicionarPessoaFisica(DTOPessoaFisica dtoPessoaFisica) : void
+  + AtualizarPessoaFisica(DTOPessoaFisica dtoPessoaFisica) : void
+  + DeletarPessoaFisica(int id) : void
+  + ObterPessoaFisicaPorId(int id) : DTOPessoaFisica
+  + ObterTodasPessoasFisicas() : IList<DTOPessoaFisica>
+}
+class ServicoPessoaJuridica {
+  + AdicionarPessoaJuridica(DTOPessoaJuridica dtoPessoaJuridica) : void
+  + AtualizarPessoaJuridica(DTOPessoaJuridica dtoPessoaJuridica) : void
+  + DeletarPessoaJuridica(int id) : void
+  + ObterPessoaJuridicaPorId(int id) : DTOPessoaJuridica
+  + ObterTodasPessoasJuridicas() : IList<DTOPessoaJuridica>
+}
+}
+
+'---------------- CAMADA DE REPOSITÓRIO ----------------'
+package "Repositório (Repositorios + Conversores + Validações + ConfigBanco)" {
+class ConfigBanco {
+- ConnectionString : string
++ GetConnection(string) : IDbConnection
+}
+
+class RepositorioCidade {
+  + AdicionarCidade(Cidade cidade) : void
+  + AtualizarCidade(Cidade cidade) : void
+  + DeletarCidade(int id) : void
+  + ObterCidadePorId(int id) : Cidade
+  + ObterTodasCidades() : IList<Cidade>
+  + ExisteCidade(int codigo, string nome, int codigoDoEstado) : bool
+}
+class RepositorioCliente {
+  + AdicionarCliente(Cliente cliente) : void
+  + AtualizarCliente(Cliente cliente) : void
+  + DeletarCliente(int id) : void
+  + ObterClientePorId(int id) : Cliente
+  + ObterTodosClientes() : IList<Cliente>
+  + ExisteCliente(int codigo) : bool
+}
+class RepositorioEstado {
+  + AdicionarEstado(Estado estado) : void
+  + AtualizarEstado(Estado estado) : void
+  + DeletarEstado(int id) : void
+  + ObterEstadoPorId(int id) : Estado
+  + ObterTodosEstados() : IList<Estado>
+  + ExisteEstado(int codigo) : bool
+}
+class RepositorioFrete {
+  + AdicionarFrete(Frete frete) : void
+  + AtualizarFrete(Frete frete) : void
+  + DeletarFrete(int id) : void
+  + ObterFretePorId(int id) : Frete
+  + ObterTodosFretes() : IList<Frete>
+  + ExisteFrete(int codigo) : bool
+  + ObterMediaDeFretePorEstado(int codigoDoEstado) : IList<dynamic>
+  + ObterFuncionariosDePessoasJuridicasERepresentantes(int mes, int ano ) : IList<dynamic>
+  + ArrecadacaoComFretesPorEstado(string nomeDoEstado) : IList<dynamic>
+}
+class RepositorioFuncionario {
+  + AdicionarFuncionario(Funcionario funcionario) : void
+  + AtualizarFuncionario(Funcionario funcionario) : void
+  + DeletarFuncionario(int id) : void
+  + ObterFuncionarioPorId(int id) : Funcionario
+  + ObterTodosFuncionarios() : IList<Funcionario>
+  + ExisteFuncionario(int codigo) : bool
+}
+class RepositorioPessoaFisica {
+  + AdicionarPessoaFisica(PessoaFisica pessoaFisica) : void
+  + AtualizarPessoaFisica(PessoaFisica pessoaFisica) : void
+  + DeletarPessoaFisica(int id) : void
+  + ObterPessoaFisicaPorId(int id) : PessoaFisica
+  + ObterTodasPessoasFisicas() : IList<PessoaFisica>
+  + ExistePessoaFisica(string cpf) : bool
+}
+class RepositorioPessoaJuridica {
+  + AdicionarPessoaJuridica(PessoaJuridica pessoaJuridica) : void
+  + AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica) : void
+  + DeletarPessoaJuridica(int id) : void
+  + ObterPessoaJuridicaPorId(int id) : PessoaJuridica
+  + ObterTodasPessoasJuridicas() : IList<PessoaJuridica>
+  + ExistePessoaJuridica(string cnpj) : bool
+}
+
+class ConversorCidade {
++ ConverterParaDTO(Cidade) : DTOCidade
++ ConverteParaDominio(DTOCidade) : Cidade
+}
+class ConversorCliente {
++ ConverterParaDTO(Cliente) : DTOCliente
++ ConverteParaDominio(DTOCliente) : Cliente
+}
+class ConversorEstado {
++ ConverterParaDTO(Estado) : DTOEstado
++ ConverteParaDominio(DTOEstado) : Estado
+}
+class ConversorFrete {
++ ConverterParaDTO(Frete) : DTOFrete
++ ConverteParaDominio(DTOFrete) : Frete
+}
+class ConversorFuncionario {
++ ConverterParaDTO(Funcionario) : DTOFuncionario
++ ConverteParaDominio(DTOFuncionario) : Funcionario
+}
+class ConversorPessoaFisica {
++ ConverterParaDTO(PessoaFisica) : DTOPessoaFisica
++ ConverteParaDominio(DTOPessoaFisica) : PessoaFisica
+}
+class ConversorPessoaJuridica {
++ ConverterParaDTO(PessoaJuridia) : DTOPessoaJuridia
++ ConverteParaDominio(DTOPessoaJuridia) : PessoaJuridia
+}
+
+class ValidacaoCidade {
+  + Valide(DTOCidade dtoCidade) : bool
+}
+class ValidacaoCliente {
+  + Valide(DTOCliente dtoCliente) : bool
+}
+class ValidacaoEstado {
+  + Valide(DTOEstado dtoEstado) : bool
+}
+class ValidacaoFrete {
+  + Valide(DTOFrete dtoFrete) : bool
+}
+class ValidacaoFuncionario {
+  + Valide(DTOFuncionario dtoFuncionario) : bool
+}
+class ValidacaoPessoaFisica {
+  + Valide(DTOPessoaFisica dtoPessoaFisica) : bool
+}
+class ValidacaoPessoaJuridica {
+  + Valide(DTOPessoaJuridica dtoPessoaJuridica) : bool
+}
+}
+
+'---------------- CAMADA DE TESTES ----------------'
+package "Teste" {
+
+class FabricaDeObjetos {
+  + FabricaCidade() : Cidade
+  + FabricaCliente() : Cliente
+  + FabricaEstado() : Estado
+  + FabricaFrete() : Frete
+  + FabricaFuncionario() : Funcionario
+  + FabricaPessoaFisica() : PessoaFisica
+  + FabricaPessoaJuridica() : PessoaJuridica
+}
+class TesteCRUD {
+  + SetUp() : void
+  + TesteAdicionarEstado() : void
+  + TesteObterTodosOsEstados() : void
+  + TesteAtualizaEstado() : void
+  + TesteDeletarEstado() : void
+  + TesteAdionarCidade() : void
+  + TesteObterTodasAsCidade() : void
+  + TesteAtualizarCidade() : void
+  + TesteDeletarCidade() : void
+  + TesteAdicionarFuncionario() : void
+  + TesteObterTodosOsFuncionarios() : void
+  + TesteAtualizarFuncionario() : void
+  + TesteDeletarFuncionario() : void
+  + TesteAdicionarCliente() : void
+  + TesteObterTodosOsClientes() : void
+  + TesteAtualizaCliente() : void
+  + TesteDeletarCliente() : void
+  + TesteAdicionarPessoaFisica() : void
+  + TesteObterTodasAsPessoasFisicas() : void
+  + TesteAtualizarPessoaFisica() : void
+  + TesteDeletarPessoaFisica() : void
+  + TesteAdicionarPessoaJuridica() : void
+  + TesteObterTodasAsPessoasJuridicas() : void
+  + TesteAtualizarPessoaJuridica() : void
+  + TesteDeletarPessoaJuridica() : void
+  + TesteAdicionarFrete() : void
+  + TesteObterTodasAsfretes() : void
+  + TesteAtualizarFrete() : void
+  + TesteDeletarFrete() : void
+}
+
+}
+@enduml
